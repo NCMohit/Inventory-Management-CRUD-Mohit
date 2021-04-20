@@ -1,0 +1,73 @@
+# THESE ARE ALL THE COMMANDS USED WHILE CREATING THE PROJECT
+
+python -m venv myenv
+myenv\Scripts\activate	( Note: in linux and macos its source myenv/bin/activate )
+django-admin startproject Inventory_Management
+cd Inventory_Management/Inventory_Management
+
+# In settings.py modified
+
+from pathlib import Path, os
+
+# In TEMPLATES -> DIRS:[] added os.path.join(BASE_DIR,'templates')
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'mydb',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+        }
+    } 
+}
+
+# added this below STATIC_URL
+
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR,'assets')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+# Install MySQL from official website
+
+(For Windows)
+Add "C:\Program Files\MySQL\MySQL Server 8.0\bin" to Path directory
+run command prompt as admin -> mysqld --console 	 ( This is your main server .. keep this running )
+
+#To create database
+
+open cmd prompt
+mysql -u root -p
+> SHOW DATABASES;
+> CREATE DATABASE mydb;
+> SHOW DATABASES;
+
+( back to console with environment )
+cd ..
+mkdir static
+mkdir templates
+
+python manage.py startapp crud
+cd crud
+# Create Entry model in models.py
+# Create urls.py , modify views.py, create templates
+
+pip install mysqlclient
+pip install Pillow
+
+python manage.py collectstatic
+
+python manage.py makemigrations
+python manage.py migrate
+
+pip freeze > requirements.txt
+
+python manage.py runserver

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Update Entry</title>
+</head>
+<body>
+	<h3>Update entry</h3><br>
+	<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+		Name: <input type="text" name="name" required value="{{entry.name}}"><br>
+		Owner Phone Number: <input type="number" name="owner_phone_number" required value="{{entry.owner_phone_number}}"><br>
+		{% if entry.is_working == True %}
+			Is Working? : <input type="checkbox" name="is_working" checked><br>
+		{% else %}
+			Is Working? : <input type="checkbox" name="is_working"><br>
+		{% endif %}
+		Image: <input type="file" name="image" accept="image/*" required id="id_image" value="{{entry.image.url}}"><br>
+		<button type="submit">Update</button>
+	</form>
+</body>
+</html>

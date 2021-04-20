@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUD Application</title>
+	<style type="text/css">
+		table, th, td {
+		  border: 1px solid black;
+		}
+		table{
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<h3>Inventory Entries</h3>
+	<br>
+	<a href="/create"><button>Create Entry</button></a><br><br>
+	<table>
+		<tr>
+			<th>Entry ID</th>
+			<th>Name</th>
+			<th>Phone Numer</th>
+			<th>Creation Date</th>
+			<th>Is Working ?</th>
+			<th>Image</th>
+			<th>Modify / Delete</th>
+		</tr>
+		{% for entry in entries %}
+			<tr>
+				<td>{{ entry.entry_id }}</td>
+				<td>{{ entry.name }}</td>
+				<td>{{ entry.owner_phone_number }}</td>
+				<td>{{ entry.creation_date }}</td>
+				<td>{{ entry.is_working }}</td>
+				<td><img src="{{ entry.image.url }}" alt="{{entry.entry_id}} image" width="500px"></td>
+				<td>
+					<a href="/update/{{ entry.entry_id }}"><button>Update</button></a><br>
+					<a href="/delete/{{ entry.entry_id }}"><button>Delete</button></a>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+	<br>
+	
+</body>
+</html>
