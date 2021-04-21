@@ -1,3 +1,5 @@
 myenv/
 Inventory_Management/assets/
 Inventory_Management/media/
+Inventory_Management/crud/__pycache__/
+Inventory_Management/crud/migrations/
